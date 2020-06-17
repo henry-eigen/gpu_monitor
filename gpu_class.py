@@ -27,18 +27,18 @@ class GPU():
         
         idle_time = len(self.activity) / 120
         
-        message = "{} has left GPU {} idle for {:.10} hours".format(self.users[-1], self.num, idle_time)
-        
+        message = "{} has left GPU {} idle for {:.3} hours".format(self.users[-1], self.num, idle_time)
+
+        # ...
         # ...
         print(message)
-        # Send message via Slack 
+        # ...
         # ...
         
     def try_message(self):
         if not self.message_sent:
             self.send_message()
         
-        #elif time.time() - self.message_sent > 10800: # if it's been 3 hours since last message
         elif (time.time() - self.message_sent) > self.message_frequency: # if it's been 3 hours since last message
             self.send_message()
         
@@ -66,7 +66,6 @@ class GPU():
             return
         
         # skip cycle if inactivity is brief
-        #if len(self.activity) < 750: # roughly 8 hours
         if len(self.activity) < self.allowed_cycles: # roughly 8 hours
             self.add_data(info)
             return
